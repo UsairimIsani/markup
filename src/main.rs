@@ -1,12 +1,9 @@
 use clap::{load_yaml, App};
-
-mod parser;
-use parser::Parser;
+mod elements;
+use elements::heading::Heading;
 fn main() {
+    let heading = Heading::new("Hello World");
+    println!("{}", heading);
     let yaml = load_yaml!("markup.yaml");
     let matches = App::from(yaml).get_matches();
-    let parser = Parser::new(matches.value_of("INPUT").unwrap());
-    for i in parser.content {
-        println!("{}", i.val);
-    }
 }
